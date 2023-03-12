@@ -12,16 +12,13 @@ class Bomb:
 
     def update(self, dt):
         self.time = self.time - dt
-
         if self.time < 1000:
             self.frame = 2
         elif self.time < 2000:
             self.frame = 1
 
     def get_range(self, map):
-
         self.sectors.append([self.posX, self.posY])
-
         for x in range(1, self.range):
             if map[self.posX + x][self.posY] == 1:
                 break
@@ -30,6 +27,7 @@ class Bomb:
             elif map[self.posX+x][self.posY] == 2:
                 self.sectors.append([self.posX+x, self.posY])
                 break
+
         for x in range(1, self.range):
             if map[self.posX - x][self.posY] == 1:
                 break
@@ -38,6 +36,7 @@ class Bomb:
             elif map[self.posX-x][self.posY] == 2:
                 self.sectors.append([self.posX-x, self.posY])
                 break
+
         for x in range(1, self.range):
             if map[self.posX][self.posY + x] == 1:
                 break
@@ -46,6 +45,7 @@ class Bomb:
             elif map[self.posX][self.posY+x] == 2:
                 self.sectors.append([self.posX, self.posY+x])
                 break
+
         for x in range(1, self.range):
             if map[self.posX][self.posY - x] == 1:
                 break

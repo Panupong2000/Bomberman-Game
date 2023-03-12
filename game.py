@@ -55,8 +55,6 @@ explosion_images = []
 
 pygame.font.init()
 font = pygame.font.SysFont('Bebas', 30)
-TEXT_LOSE = font.render('GAME OVER', False, (0, 0, 0))
-TEXT_WIN = font.render('WIN', False, (0, 0, 0))
 
 
 def game_init(path, player_alg, en1_alg, en2_alg, en3_alg, scale, button_all):
@@ -185,15 +183,15 @@ def draw():
         if en.life:
             s.blit(en.animation[en.direction][en.frame],
                    (en.posX * (TILE_WIDTH / 4), en.posY * (TILE_HEIGHT / 4), TILE_WIDTH, TILE_HEIGHT))
-            if show_path:
-                if en.algorithm == Algorithm.DFS:
-                    for sek in en.path:
-                        pygame.draw.rect(s, (255, 0, 0, 240),
-                                         [sek[0] * TILE_WIDTH, sek[1] * TILE_HEIGHT, TILE_WIDTH, TILE_WIDTH], 1)
-                else:
-                    for sek in en.path:
-                        pygame.draw.rect(s, (255, 0, 255, 240),
-                                         [sek[0] * TILE_WIDTH, sek[1] * TILE_HEIGHT, TILE_WIDTH, TILE_WIDTH], 1)
+            # if show_path:
+            #     if en.algorithm == Algorithm.DFS:
+            #         for sek in en.path:
+            #             pygame.draw.rect(s, (255, 0, 0, 240),
+            #                              [sek[0] * TILE_WIDTH, sek[1] * TILE_HEIGHT, TILE_WIDTH, TILE_WIDTH], 1)
+            #     else:
+            #         for sek in en.path:
+            #             pygame.draw.rect(s, (255, 0, 255, 240),
+            #                              [sek[0] * TILE_WIDTH, sek[1] * TILE_HEIGHT, TILE_WIDTH, TILE_WIDTH], 1)
 
     pygame.display.update()
 
@@ -208,7 +206,6 @@ def generate_map():
                 continue
             if random.randint(0, 9) < 7:
                 grid[i][j] = 2
-
     return
 
 
@@ -281,6 +278,7 @@ def update_bombs(dt):
             exp_temp.explode(grid, bombs, b)
             exp_temp.clear_sectors(grid)
             explosions.append(exp_temp)
+
     if player not in enemy_list:
         player.check_death(explosions)
     for en in enemy_list:
@@ -294,7 +292,7 @@ def update_bombs(dt):
 def game_over():
     count = 0
     for en in enemy_list:
-        en.make_move(grid, bombs, explosions, ene_blocks)
+        # en.make_move(grid, bombs, explosions, ene_blocks)
         if en.life:
             count += 1
     if count == 0:

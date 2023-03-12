@@ -1,7 +1,7 @@
 import pygame
 import random
 from bomb import Bomb
-from node import Node
+# from node import Node
 from algorithm import Algorithm
 
 
@@ -51,7 +51,6 @@ class Enemy:
     def make_move(self, map, bombs, explosions, enemy):
         if not self.life:
             return
-
         if len(self.movement_path) == 0:
             if self.plant:
                 bombs.append(self.plant_bomb(map))
@@ -84,7 +83,6 @@ class Enemy:
             self.dfs_rec(grid, 0, new_path, depth)
         else:
             self.dfs_rec(grid, 2, new_path, depth)
-
         self.path = new_path
 
     def dfs_rec(self, grid, end, path, depth):
@@ -141,7 +139,6 @@ class Enemy:
 
     def create_grid(self, map, bombs, explosions, enemys):
         grid = [[0] * len(map) for r in range(len(map))]
-
         # 0 - safe
         # 1 - unsafe
         # 2 - destryable
